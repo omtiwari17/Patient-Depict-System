@@ -60,16 +60,26 @@ def doctor_dashboard(request):
     return render(request, "doctor-dashboard.html")
 
 def doctor_account_edit(request):
-    return render(request, "doctor-account-edit.html")
+    email = request.session.get('doctor_session')
+    doctor_acc = create_doctor.objects.get(email=email)
+    return render(request, "doctor-account-edit.html", 'doctor_acc': doctor_acc)
 
 def doctor_account_view(request):
-    return render(request, "doctor-account-view.html")
+    email = request.session.get('doctor_session')
+    doctor_acc = create_doctor.objects.get(email=email)
+    return render(request, "doctor-account-view.html", {
+        'doctor_acc': doctor_acc
+    })
 
 def doctor_messages(request):
     return render(request, "doctor-messages.html")
 
 def doctor_patients(request):
-    return render(request, "doctor-patients.html")
+    #get data of patient for the doctor assigned to them check from session id
+    doctor_id = request.session.get('doctor_id')
+    patient_data = create_patient.objects.filter(doctor_id=doctor_id).order_by('name')
+
+    return render(request, "doctor-patients.html", {'patient_data': patient_data})
 
 def doctor_reports(request):
     patients = create_patient.objects.all().order_by('name')
@@ -313,6 +323,8 @@ def role_login(request, role: str):
         doc_obj= doc[0]['name']
         #request.session['doctor_session'] = email
         request.session['doctor_name'] = doc_obj
+        request.session['doctor_session'] = email
+        request.session['doctor_id'] = doc[0]['doc_id']
         return redirect("/doctor/dashboard/")
 
     elif 'patient' in ALLOWED_ROLES and pat:
