@@ -1,0 +1,32 @@
+{% extends 'doctor-base.html' %} {% block doctor %}
+
+  <main class="main-content fade-in">
+    <section class="section container reveal">
+      <h2 class="h2">💬 Communication Center</h2>
+      <div class="achievement-list card" style="padding:1rem;border-radius:12px;">
+        <div class="achievement">
+          <span class="achievement-icon">📩</span>
+          <div>
+            <h3>Recent Notifications Sent</h3>
+            <p>Status update sent to John Smith’s family — 2 hours ago</p>
+          </div>
+        </div>
+        <div class="achievement">
+          <span class="achievement-icon">🔗</span>
+          <div>
+            <h3>Active Share Links</h3>
+            <p>3 secure links generated, 2 viewed by family members</p>
+          </div>
+        </div>
+        <div class="achievement">
+          <span class="achievement-icon">📊</span>
+          <div>
+            <h3>AI Analysis Reports</h3>
+            <p>5 reports processed today, all summaries generated successfully</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+{% endblock %}

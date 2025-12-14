@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Doctor Portal – Patient Depict System</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <!-- Side Navigation -->
+  <aside class="side-panel">
+    <div class="panel-header">👨‍⚕️ Doctor Portal</div>
+
+    <nav class="panel-menu">
+      <button class="panel-btn active" data-target="#dashboard"><span>🏠</span> Dashboard</button>
+      <button class="panel-btn" data-target="#patients"><span>👥</span> Patients</button>
+      <button class="panel-btn" data-target="#reports"><span>📄</span> Reports</button>
+      <button class="panel-btn" data-target="#status"><span>🔄</span> Update Status</button>
+      <button class="panel-btn" data-target="#messages"><span>💬</span> Messages</button>
+      <button class="panel-btn" data-target="#viewAccount"><span>👁️</span> View Account</button>
+      <button class="panel-btn" data-target="#editAccount"><span>✏️</span> Edit Account</button>
+      <button class="panel-btn logout" id="logoutBtn"><span>🚪</span> Logout</button>
+    </nav>
+
+    <div class="panel-footer">Health Buddy &copy; 2025</div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content fade-in">
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="section container reveal">
+      <h1 class="h2">👨‍⚕️ Doctor Dashboard</h1>
+      <p class="sub">Welcome! Manage patient records, upload reports, update statuses, and keep families informed.</p>
+
+      <div class="grid cards">
+        <div class="card hover-lift reveal">
+          <h3>Today’s Reports</h3>
+          <p class="sub">5 uploaded • 5 summarized</p>
+        </div>
+        <div class="card hover-lift reveal">
+          <h3>Pending Status Updates</h3>
+          <p class="sub">2 patients awaiting review</p>
+        </div>
+        <div class="card hover-lift reveal">
+          <h3>Unseen Messages</h3>
+          <p class="sub">3 family follow-ups</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PATIENTS -->
+    <section id="patients" class="section container reveal">
+      <h2 class="h2">👥 Patients</h2>
+
+      <input
+        type="text"
+        id="reportSearch"
+        placeholder="🔍 Search patients..."
+        class="input"
+        style="margin: .8rem 0 1.2rem 0;"
+      />
+
+      <div class="table card">
+        <!-- FIX: id goes on the TABLE (so app.js selector '#reportTable tbody tr' works) -->
+        <table id="reportTable" style="width:100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background:#f8f9fa;">
+              <th style="padding: .9rem; text-align:left; border-bottom: 2px solid #e8f0fe;">Patient Name</th>
+              <th style="padding: .9rem; text-align:left; border-bottom: 2px solid #e8f0fe;">Status</th>
+              <th style="padding: .9rem; text-align:left; border-bottom: 2px solid #e8f0fe;">Last Visit</th>
+              <th style="padding: .9rem; text-align:left; border-bottom: 2px solid #e8f0fe;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">John Smith</td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">
+                <span style="background:#e8f5f3; color:#2ec4b6; padding:.25rem .7rem; border-radius:999px; font-size:.85rem; font-weight:700; border:2px solid #2ec4b6;">Good</span>
+              </td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">2025-09-10</td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;"><a href="#" style="color:#3498db;">View Details</a></td>
+            </tr>
+            <tr>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">Sarah Johnson</td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">
+                <span style="background:#fef9e6; color:#e1a800; padding:.25rem .7rem; border-radius:999px; font-size:.85rem; font-weight:700; border:2px solid #e1a800;">Stable</span>
+              </td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">2025-09-08</td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;"><a href="#" style="color:#3498db;">View Details</a></td>
+            </tr>
+            <tr>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">Michael Brown</td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">
+                <span style="background:#fdeaea; color:#e63946; padding:.25rem .7rem; border-radius:999px; font-size:.85rem; font-weight:700; border:2px solid #e63946;">Critical</span>
+              </td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;">2025-09-14</td>
+              <td style="padding: .9rem; border-bottom: 1px solid #e8f0fe;"><a href="#" style="color:#3498db;">View Details</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- REPORTS (Upload) -->
+    <section id="reports" class="section container reveal">
+      <h2 class="h2">📄 Upload Patient Report</h2>
+      <form id="uploadForm" class="card" style="padding:1.4rem; border-radius:12px;">
+        <div style="margin-bottom:1rem;">
+          <label for="patientSelect" style="display:block; margin-bottom:.4rem; font-weight:700; color:#2c3e50;">Select Patient</label>
+          <select id="patientSelect" name="patient" required class="input">
+            <option value="">Choose a patient</option>
+            <option value="john">John Smith</option>
+            <option value="sarah">Sarah Johnson</option>
+            <option value="michael">Michael Brown</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label for="reportType" style="display:block; margin-bottom:.4rem; font-weight:700; color:#2c3e50;">Report Type</label>
+          <select id="reportType" name="reportType" required class="input">
+            <option value="">Select report type</option>
+            <option value="blood">Blood Test</option>
+            <option value="xray">X-Ray</option>
+            <option value="mri">MRI Scan</option>
+            <option value="ct">CT Scan</option>
+            <option value="ecg">ECG</option>
+            <option value="general">General Checkup</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label for="reportFile" style="display:block; margin-bottom:.4rem; font-weight:700; color:#2c3e50;">Upload File</label>
+          <input type="file" id="reportFile" name="reportFile" accept=".pdf,.jpg,.png,.docx" required class="input"/>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label for="notes" style="display:block; margin-bottom:.4rem; font-weight:700; color:#2c3e50;">Doctor’s Notes</label>
+          <textarea id="notes" name="notes" rows="4" class="input" placeholder="Add any additional notes or observations..." style="resize:vertical;"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">📤 Upload Report</button>
+        <div id="uploadStatus" style="margin-top:.8rem;"></div>
+      </form>
+    </section>
+
+    <!-- STATUS (Update) -->
+    <section id="status" class="section container reveal">
+      <h2 class="h2">🔄 Update Patient Status</h2>
+      <form id="statusUpdateForm" class="card" style="padding:1.4rem; border-radius:12px;">
+        <div style="margin-bottom:1rem;">
+          <label for="statusPatient" style="display:block; margin-bottom:.4rem; font-weight:700; color:#2c3e50;">Select Patient</label>
+          <select id="statusPatient" name="patient" required class="input">
+            <option value="">Choose a patient</option>
+            <option value="john">John Smith</option>
+            <option value="sarah">Sarah Johnson</option>
+            <option value="michael">Michael Brown</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label for="status" style="display:block; margin-bottom:.4rem; font-weight:700; color:#2c3e50;">Health Status</label>
+          <select id="status" name="status" required class="input">
+            <option value="">Select status</option>
+            <option value="Good">✅ Good</option>
+            <option value="Stable">🟡 Stable</option>
+            <option value="Monitoring">🟠 Monitoring</option>
+            <option value="Critical">🔴 Critical</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+          <label for="statusNotes" style="display:block; margin-bottom:.4rem; font-weight:700; color:#2c3e50;">Status Notes</label>
+          <textarea id="statusNotes" name="statusNotes" rows="3" class="input" placeholder="Explain the reason for status change..." style="resize:vertical;"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">✅ Save Update</button>
+        <div id="statusResponse" style="margin-top:.8rem;"></div>
+      </form>
+    </section>
+
+    <!-- MESSAGES -->
+    <section id="messages" class="section container reveal">
+      <h2 class="h2">💬 Communication Center</h2>
+      <div class="achievement-list card" style="padding:1rem; border-radius:12px;">
+        <div class="achievement">
+          <span class="achievement-icon">📩</span>
+          <div>
+            <h3>Recent Notifications Sent</h3>
+            <p>Status update sent to John Smith’s family — 2 hours ago</p>
+          </div>
+        </div>
+        <div class="achievement">
+          <span class="achievement-icon">🔗</span>
+          <div>
+            <h3>Active Share Links</h3>
+            <p>3 secure links generated, 2 viewed by family members</p>
+          </div>
+        </div>
+        <div class="achievement">
+          <span class="achievement-icon">📊</span>
+          <div>
+            <h3>AI Analysis Reports</h3>
+            <p>5 reports processed today, all summaries generated successfully</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW ACCOUNT -->
+    <section id="viewAccount" class="section container reveal">
+      <h2 class="h2">👁️ Account Overview</h2>
+      <div class="card" style="padding:1rem;">
+        <p><b>Name:</b> Dr. Jane Doe</p>
+        <p><b>Email:</b> <span id="accountEmail">doctor@health.com</span></p>
+        <p><b>Specialization:</b> Internal Medicine</p>
+        <p><b>Clinic:</b> Health Buddy Clinic</p>
+      </div>
+    </section>
+
+    <!-- EDIT ACCOUNT -->
+    <section id="editAccount" class="section container reveal">
+      <h2 class="h2">✏️ Edit Account</h2>
+      <form id="editAccountForm" class="card" style="padding:1.4rem; border-radius:12px;">
+        <div style="display:grid; gap:.8rem; grid-template-columns:1fr 1fr;">
+          <div>
+            <label for="docName" style="display:block; font-weight:700; margin-bottom:.3rem;">Full Name</label>
+            <input type="text" id="docName" class="input" value="Dr. Jane Doe"/>
+          </div>
+          <div>
+            <label for="docEmail" style="display:block; font-weight:700; margin-bottom:.3rem;">Email</label>
+            <input type="email" id="docEmail" class="input" value="doctor@health.com"/>
+          </div>
+          <div>
+            <label for="docSpec" style="display:block; font-weight:700; margin-bottom:.3rem;">Specialization</label>
+            <input type="text" id="docSpec" class="input" value="Internal Medicine"/>
+          </div>
+          <div>
+            <label for="docClinic" style="display:block; font-weight:700; margin-bottom:.3rem;">Clinic</label>
+            <input type="text" id="docClinic" class="input" value="Health Buddy Clinic"/>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit" style="margin-top:1rem;">💾 Save Changes</button>
+        <div id="editResponse" style="margin-top:.8rem;"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© 2025 Health Buddy.</small>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Side nav: smooth scroll + active state
+    const panelButtons = document.querySelectorAll('.panel-menu .panel-btn[data-target]');
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+
+    panelButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        const el = document.querySelector(target);
+        if (!el) return;
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // active state on buttons
+        panelButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Highlight the nav item based on scroll position (optional but nice)
+    const observeActive = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = '#' + entry.target.id;
+          panelButtons.forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-target') === id);
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
+    sections.forEach(sec => observeActive.observe(sec));
+
+    // Logout clears session and returns to landing
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+      });
+    }
+
+    // Fill account email from session if available
+    const accEmailSpan = document.getElementById('accountEmail');
+    const storedEmail = sessionStorage.getItem('userEmail');
+    if (accEmailSpan && storedEmail) accEmailSpan.textContent = storedEmail;
+
+    // Lightweight Edit Account submit (demo)
+    const editForm = document.getElementById('editAccountForm');
+    if (editForm) {
+      editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const resp = document.getElementById('editResponse');
+        if (resp) {
+          resp.innerHTML = '<div style="color:#2ec4b6;font-weight:bold;padding:.8rem;background:#e8f5f3;border-radius:8px;border-left:4px solid #2ec4b6;">✅ Account details saved (demo)</div>';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

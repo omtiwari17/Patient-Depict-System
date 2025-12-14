@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" class="admin-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard – Patient Depict System</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <!-- Side Navigation -->
+    <aside class="side-panel">
+      <div class="panel-header">🛡️ Admin Portal</div>
+      <nav class="panel-menu">
+        <a class="panel-btn active" href="/admin1/dashboard/"
+          ><span>📊</span> Dashboard</a
+        >
+        <a class="panel-btn" href="/admin1/doctor/"><span>👨‍⚕️</span> Doctors</a>
+        <a class="panel-btn" href="/admin1/patients/"
+          ><span>🧑‍🤝‍🧑</span> Patients</a
+        >
+        <a class="panel-btn" href="/admin1/accounts/create/"
+          ><span>✏️</span> Create Accounts</a
+        >
+        <a class="panel-btn" href="/admin1/accounts/edit/"
+          ><span>✏️</span> Edit Accounts</a
+        >
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="panel-btn logout" type="submit">
+            <span>🚪</span> Logout
+          </button>
+        </form>
+      </nav>
+      <div class="panel-footer">Health Buddy © 2025</div>
+    </aside>
+  </body>
+</html>

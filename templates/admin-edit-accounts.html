@@ -1,0 +1,220 @@
+{% extends 'admin-base.html' %} {% block admin %}
+
+<main class="main-content fade-in">
+  <section class="section container reveal">
+    <h2 class="h2">✏️ Edit Accounts</h2>
+
+    <!-- ======================= EDIT DOCTOR FORM ======================= -->
+    <form
+      id="editDoctorForm"
+      class="card"
+      style="padding: 1.2rem; border-radius: 12px; margin-bottom: 2rem"
+    >
+      <h3 class="accent">🩺 Edit Doctor</h3>
+
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.8rem">
+        <div>
+          <label for="doctorEmail">Lookup by Email</label>
+          <input
+            id="doctorEmail"
+            name="doctorEmail"
+            class="input"
+            placeholder="doctor@domain.com"
+            required
+          />
+        </div>
+        <div>
+          <label for="doctorStatus">Status</label>
+          <select id="doctorStatus" name="doctorStatus" class="input">
+            <option value="">Select Status</option>
+            <option>Active</option>
+            <option>Suspended</option>
+            <option>On Leave</option>
+            <option>Retired</option>
+          </select>
+        </div>
+        <div>
+          <label for="doctorId">Doctor ID</label>
+          <input
+            id="doctorId"
+            name="doctorId"
+            class="input"
+            placeholder="e.g., DOC-2025-0042"
+          />
+        </div>
+        <div>
+          <label for="doctorName">Full Name</label>
+          <input id="doctorName" name="doctorName" class="input" />
+        </div>
+        <div>
+          <label for="doctorDepartment">Department</label>
+          <input
+            id="doctorDepartment"
+            name="doctorDepartment"
+            class="input"
+            placeholder="e.g., Cardiology"
+          />
+        </div>
+        <div>
+          <label for="doctorSpecialist">Specialist</label>
+          <input
+            id="doctorSpecialist"
+            name="doctorSpecialist"
+            class="input"
+            placeholder="e.g., Cardiologist"
+          />
+        </div>
+        <div>
+          <label for="doctorLicense">License No.</label>
+          <input
+            id="doctorLicense"
+            name="doctorLicense"
+            class="input"
+            placeholder="e.g., MCI/2025/123456"
+          />
+        </div>
+        <div>
+          <label for="doctorExperience">Experience (years)</label>
+          <input
+            id="doctorExperience"
+            name="doctorExperience"
+            type="number"
+            min="0"
+            class="input"
+          />
+        </div>
+        <div>
+          <label for="doctorPhone">Phone</label>
+          <input
+            id="doctorPhone"
+            name="doctorPhone"
+            class="input"
+            placeholder="e.g., +91 55512-34567"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn">Save Doctor Changes</button>
+      <div id="doctorEditResponse" style="margin-top: 1rem"></div>
+    </form>
+
+    <!-- ======================= EDIT PATIENT FORM ======================= -->
+    <form
+      id="editPatientForm"
+      class="card"
+      style="padding: 1.2rem; border-radius: 12px"
+    >
+      <h3 class="accent">🧍‍♂️ Edit Patient</h3>
+
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.8rem">
+        <div>
+          <label for="patientEmail">Lookup by Email</label>
+          <input
+            id="patientEmail"
+            name="patientEmail"
+            class="input"
+            placeholder="patient@domain.com"
+            required
+          />
+        </div>
+        <div>
+          <label for="patientStatus">Status</label>
+          <select id="patientStatus" name="patientStatus" class="input">
+            <option value="">Select Status</option>
+            <option>Active</option>
+            <option>Suspended</option>
+            <option>Discharged</option>
+          </select>
+        </div>
+        <div>
+          <label for="patientId">Patient ID</label>
+          <input
+            id="patientId"
+            name="patientId"
+            class="input"
+            placeholder="e.g., HB-2025-0012"
+          />
+        </div>
+        <div>
+          <label for="patientName">Full Name</label>
+          <input id="patientName" name="patientName" class="input" />
+        </div>
+        <div>
+          <label for="patientPhone">Phone</label>
+          <input
+            id="patientPhone"
+            name="patientPhone"
+            class="input"
+            placeholder="e.g., +91 55598-76543"
+          />
+        </div>
+        <div>
+          <label for="patientAge">Age</label>
+          <input
+            id="patientAge"
+            name="patientAge"
+            type="number"
+            min="0"
+            class="input"
+          />
+        </div>
+        <div>
+          <label for="patientGender">Gender</label>
+          <select id="patientGender" name="patientGender" class="input">
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+        <div>
+          <label for="patientBloodGroup">Blood Group</label>
+          <select id="patientBloodGroup" name="patientBloodGroup" class="input">
+            <option value="">Select</option>
+            <option>O+</option>
+            <option>O-</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="patientAddress">Address</label>
+          <textarea
+            id="patientAddress"
+            name="patientAddress"
+            class="input"
+            rows="3"
+          ></textarea>
+        </div>
+        <div>
+          <label for="patientDisease">Disease</label>
+          <input
+            id="patientDisease"
+            name="patientDisease"
+            class="input"
+            placeholder="e.g., Diabetes"
+          />
+        </div>
+        <div>
+          <label for="assignedDoctor">Doctor</label>
+          <input
+            id="assignedDoctor"
+            name="assignedDoctor"
+            class="input"
+            list="doctorList"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn">Save Patient Changes</button>
+      <div id="patientEditResponse" style="margin-top: 1rem"></div>
+    </form>
+  </section>
+</main>
+
+{% endblock %}

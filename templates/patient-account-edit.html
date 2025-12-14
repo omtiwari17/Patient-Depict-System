@@ -1,0 +1,24 @@
+{% extends 'patient-base.html' %} {% block patient %}
+
+  <main class="main-content fade-in">
+    <section class="section container reveal">
+      <h2 class="h2">✏️ Edit Account</h2>
+      <form id="patientEditForm" class="card" style="margin-bottom:1rem;">
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:.8rem;">
+          <div><label>Patient Email / ID</label><input name="email" list="patientList" class="input" required></div>
+          <div style="align-self:end"><small class="muted">Select to load</small></div>
+          <div><label>Name</label><input name="name" class="input"></div>
+          <div><label>Hospital ID</label><input name="hospitalId" class="input"></div>
+          <div><label>Age</label><input name="age" type="number" class="input"></div>
+          <div class="full"><label>Address</label><textarea name="address" rows="4" class="input"></textarea></div>
+          <div><label>Disease</label><input name="disease" class="input"></div>
+          <div><label>Doctor</label><input name="doctor" class="input"></div>
+        </div>
+        <button class="btn" type="submit">Save Changes</button>
+        <div id="patientEditResponse" style="margin-top:1rem;"></div>
+      </form>
+    </section>
+  </main>
+
+
+{% endblock %}

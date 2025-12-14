@@ -1,0 +1,7 @@
+  <script src="/static/app.js"></script>
+  <script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) logoutBtn.addEventListener('click', ()=>{ sessionStorage.clear(); location.href='index.html'; });
+  </script>
+</body>
+</html>

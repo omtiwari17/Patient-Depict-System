@@ -1,0 +1,26 @@
+{% extends 'doctor-base.html' %} {% block doctor %}
+
+  <!-- Main -->
+  <main class="main-content fade-in">
+    <section class="section container reveal">
+      <h1 class="h2">Hi, {{ request.session.doctor_name }}</h1>
+      <p class="sub">Welcome! Quick snapshots of your day.</p>
+      {{doc_obj}}
+      <div class="grid cards">
+        <div class="card hover-lift reveal">
+          <h3>Today’s Reports</h3>
+          <p class="sub">2 uploaded</p>
+        </div>
+        <div class="card hover-lift reveal">
+          <h3>Pending Status</h3>
+          <p class="sub">2 patients awaiting review</p>
+        </div>
+        <div class="card hover-lift reveal">
+          <h3>Unseen Messages</h3>
+          <p class="sub">1 family follow-ups</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+{% endblock %}

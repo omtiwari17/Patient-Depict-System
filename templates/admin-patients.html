@@ -1,0 +1,47 @@
+{% extends 'admin-base.html' %} {% block admin %}
+  <main class="main-content fade-in">
+    <section class="section container reveal">
+      <h2 class="h2">🧑‍🤝‍🧑 Patients</h2>
+      <input id="reportSearch" class="input" placeholder="🔎 Search patients…" style="max-width:420px;margin:.8rem 0 1.2rem;"/>
+
+      <div class="card">
+        <table id="reportTable" class="table">
+          <thead>
+            <tr>
+            <th>ID</th>
+            <th>Patient ID</th>
+            <th>Name</th>
+            <th>Email ID</th>
+            <th>Phone</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>Blood Group</th>
+            <th>Disease</th>
+            <th>Doctor</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for pat in patient_data %}
+            <tr>
+              <td>{{ pat.id }}</td>
+              <td>{{ pat.patient_id }}</td>
+              <td>{{ pat.name }}</td>
+              <td>{{ pat.email }}</td>
+              <td>{{ pat.phone }}</td>
+              <td>{{ pat.age }}</td>
+              <td>{{ pat.address }}</td>
+              <td>{{ pat.gender }}</td>
+              <td>{{ pat.blood_group }}</td>
+              <td>{{ pat.disease }}</td>
+              <td>{{ pat.doctor }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+{% endblock %}

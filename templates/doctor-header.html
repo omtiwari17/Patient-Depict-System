@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Edit Account – Doctor Portal</title>
+  <link rel="stylesheet" href="/static/styles.css"/>
+</head>
+<body>
+  <aside class="side-panel">
+    <div class="panel-header">👨‍⚕️ Doctor Portal</div>
+    <nav class="panel-menu">
+      <a class="panel-btn" href="/doctor/dashboard/"><span>🏠</span> Dashboard</a>
+      <a class="panel-btn" href="/doctor/patients/"><span>👥</span> Patients</a>
+      <a class="panel-btn" href="/doctor/reports/"><span>📄</span> Reports</a>
+      <a class="panel-btn" href="/doctor/status/"><span>🔄</span> Update Status</a>
+      <a class="panel-btn" href="/doctor/messages/"><span>💬</span> Messages</a>
+      <a class="panel-btn" href="/doctor/account-view/"><span>👁️</span> View Account</a>
+      <a class="panel-btn active" href="/doctor/account-edit/"><span>✏️</span> Edit Account</a>
+      <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="panel-btn logout" type="submit">
+            <span>🚪</span> Logout
+          </button>
+        </form>
+    </nav>
+    <div class="panel-footer">Health Buddy © 2025</div>
+  </aside>

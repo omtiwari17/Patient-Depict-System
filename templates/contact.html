@@ -1,0 +1,172 @@
+{% extends "base.html" %}  {% block content %}
+
+    <!-- Compact hero that fits the site’s gradient + spacing -->
+    <header class="hero hero-compact">
+      <div class="container center">
+        <span class="kicker bounce-in reveal">Contact</span>
+        <h1 class="h2 text-focus-in reveal">
+          Let’s talk about your health tech
+        </h1>
+        <p class="sub slide-up reveal">
+          Questions, support, partnerships—drop us a line and we’ll get back
+          within 24 hours.
+        </p>
+      </div>
+    </header>
+
+    <main class="section container">
+      <!-- Two-column layout: info cards (left) + form card (right) -->
+      <div class="contact-wrap">
+        <!-- Info column -->
+        <div class="info-stack">
+          <div class="contact-card reveal hover-lift">
+            <div class="contact-avatar">📧</div>
+            <div class="contact-body">
+              <h3>Email Support</h3>
+              <p class="accent">support@healthbuddy.com</p>
+              <small>We reply within 24 hours on business days.</small>
+            </div>
+          </div>
+
+          <div class="contact-card reveal hover-lift">
+            <div class="contact-avatar">📞</div>
+            <div class="contact-body">
+              <h3>Phone</h3>
+              <p class="accent">+1 (555) 123-4567</p>
+              <small>Mon–Fri, 9:00–18:00</small>
+            </div>
+          </div>
+
+          <div class="contact-card reveal hover-lift">
+            <div class="contact-avatar">🏢</div>
+            <div class="contact-body">
+              <h3>Office</h3>
+              <p class="accent">123 Health Tech Blvd, NY 10001</p>
+              <small>Visits by appointment only.</small>
+            </div>
+          </div>
+
+          <div class="contact-card reveal hover-lift">
+            <div class="contact-avatar">🚨</div>
+            <div class="contact-body">
+              <h3>Emergency</h3>
+              <p class="accent">emergency@healthbuddy.com</p>
+              <small>Critical production issues only.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form column -->
+        <form id="contactForm" class="form contact-form reveal hover-glow">
+          <h2 class="text-focus-in">Send us a message</h2>
+
+          <div class="form-field">
+            <label for="firstName">First Name *</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              class="input"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="lastName">Last Name *</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              class="input"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email Address *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="input"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+              <option value="low">Low – General</option>
+              <option value="medium" selected>Medium – Standard</option>
+              <option value="high">High – Urgent</option>
+              <option value="critical">Critical – Emergency</option>
+            </select>
+          </div>
+
+          <div class="form-field full">
+            <label for="subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a topic</option>
+              <option value="general">General Inquiry</option>
+              <option value="support">Technical Support</option>
+              <option value="billing">Billing</option>
+              <option value="partnership">Partnership</option>
+              <option value="feedback">Feedback</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-field full">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+
+          <div class="form-check full">
+            <input type="checkbox" id="newsletter" name="newsletter" />
+            <label for="newsletter"
+              ><i class="fas fa-bell"></i> Subscribe to product updates</label
+            >
+          </div>
+
+          <button type="submit" class="btn-submit pulse-glow">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+
+          <div id="formResponse" class="fade-in full"></div>
+        </form>
+      </div>
+
+      <!-- FAQ -->
+      <section class="faq-section">
+        <h2 class="reveal text-focus-in">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item reveal">
+            <h3>Is my health data secure?</h3>
+            <p>
+              Yes—bank-level encryption and strict access controls are baked in.
+            </p>
+          </div>
+          <div class="faq-item reveal">
+            <h3>How accurate is the AI?</h3>
+            <p>
+              We target robust, clinician-reviewed summaries with continuous
+              model tuning.
+            </p>
+          </div>
+          <div class="faq-item reveal">
+            <h3>Can I share reports with family?</h3>
+            <p>Yes—create secure, revokable links with privacy controls.</p>
+          </div>
+          <div class="faq-item reveal">
+            <h3>What formats are supported?</h3>
+            <p>PDF, DOCX, and common image formats.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Login modal removed: use dedicated /login/ page -->
+
+    <div class="wave-bottom"></div>
+
+{% endblock %}

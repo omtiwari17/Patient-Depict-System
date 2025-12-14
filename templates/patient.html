@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Portal - Health Buddy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="side-panel">
+    <div class="panel-header">👤 Patient Portal</div>
+    <div class="panel-menu">
+      <button class="panel-btn"><span>🏠</span> Dashboard</button>
+      <button class="panel-btn"><span>📄</span> My Reports</button>
+      <button class="panel-btn"><span>💡</span> AI Insights</button>
+      <button class="panel-btn"><span>🔗</span> Share Status</button>
+      <button class="panel-btn"><span>👁️</span> View Account</button>
+      <button class="panel-btn"><span>✏️</span> Edit Account</button>
+      <button class="panel-btn logout"><span>🚪</span> Logout</button>
+    </div>
+    <div class="panel-footer">Health Buddy &copy; 2025</div>
+  </div>
+  <main class="main-content fade-in">
+    <h1>👤 Welcome, John Smith</h1>
+    <div class="about-intro">
+      <p>Your personal health dashboard. View reports, track your health status, get AI-powered insights, and share updates with your loved ones.</p>
+    </div>
+    
+    <div class="mission-vision">
+      <div class="mission">
+        <h2>📊 Current Health Status</h2>
+        <div style="text-align: center; padding: 2rem;">
+          <div style="display: inline-block; padding: 1.5rem 3rem; background: #e8f5f3; border: 2px solid #2ec4b6; border-radius: 20px; margin-bottom: 1rem;">
+            <span id="statusBadge" style="font-size: 1.5rem; font-weight: 700; color: #2ec4b6;">Good</span>
+          </div>
+          <p style="color: #5a6c7d; margin-bottom: 2rem;">Last updated: September 14, 2025</p>
+          
+          <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 15px; margin-bottom: 1.5rem;">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">🔗 Share Your Status</h4>
+            <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+              <input type="text" id="shareLink" value="https://healthbuddy.com/share/john-smith-xyz123" readonly style="flex: 1; padding: 0.8rem; border: 2px solid #e8f0fe; border-radius: 8px; background: #ffffff;">
+              <button id="copyLink" style="background: #3498db; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; white-space: nowrap;">📋 Copy Link</button>
+            </div>
+            <p style="color: #5a6c7d; font-size: 0.9rem; margin: 0;">Share this secure link with family and friends to let them check your current health status.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="vision">
+        <h2>🩺 Recent Reports</h2>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #3498db;">
+            <h4 style="color: #2c3e50; margin: 0 0 0.5rem 0;">Blood Test Results</h4>
+            <p style="color: #5a6c7d; margin: 0 0 0.5rem 0; font-size: 0.9rem;">September 14, 2025</p>
+            <a href="#" style="color: #3498db; font-weight: 600; text-decoration: none;">📄 View Report</a>
+          </div>
+          <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #2ec4b6;">
+            <h4 style="color: #2c3e50; margin: 0 0 0.5rem 0;">Chest X-Ray</h4>
+            <p style="color: #5a6c7d; margin: 0 0 0.5rem 0; font-size: 0.9rem;">September 10, 2025</p>
+            <a href="#" style="color: #3498db; font-weight: 600; text-decoration: none;">📄 View Report</a>
+          </div>
+          <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #f4a261;">
+            <h4 style="color: #2c3e50; margin: 0 0 0.5rem 0;">General Checkup</h4>
+            <p style="color: #5a6c7d; margin: 0 0 0.5rem 0; font-size: 0.9rem;">September 5, 2025</p>
+            <a href="#" style="color: #3498db; font-weight: 600; text-decoration: none;">📄 View Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="values">
+      <h2>🤖 AI-Powered Insights</h2>
+      <div class="values-grid">
+        <div class="value">
+          <h3>📋 Report Summary</h3>
+          <p>Get complex medical reports explained in simple, easy-to-understand language.</p>
+          <button id="generateSummary" style="background: #3498db; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">🤖 Generate Summary</button>
+          <div id="aiSummary" style="margin-top: 1rem;"></div>
+        </div>
+        
+        <div class="value">
+          <h3>🥗 Diet Recommendations</h3>
+          <p>Receive personalized diet suggestions based on your current health condition and medical history.</p>
+          <button id="getDietSuggestions" style="background: #2ec4b6; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">🥗 Get Diet Plan</button>
+          <div id="dietSuggestions" style="margin-top: 1rem;"></div>
+        </div>
+        
+        <div class="value">
+          <h3>📊 Health Trends</h3>
+          <p>Track your health metrics over time and see improvement patterns.</p>
+          <button onclick="alert('Health trends feature coming soon!')" style="background: #f4a261; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">📈 View Trends</button>
+        </div>
+        
+        <div class="value">
+          <h3>🔔 Smart Alerts</h3>
+          <p>Get notified about important health milestones, medication reminders, and checkup schedules.</p>
+          <button onclick="alert('Smart alerts feature coming soon!')" style="background: #e63946; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">🔔 Manage Alerts</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="team">
+      <h2>📚 Your Health Library</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <h3>📄 All Reports</h3>
+          <p class="role">Medical Documents</p>
+          <p>Access and download all your medical reports, test results, and imaging studies in one place.</p>
+          <button style="background: #3498db; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">📂 View All</button>
+        </div>
+        
+        <div class="team-member">
+          <h3>💊 Medications</h3>
+          <p class="role">Current Prescriptions</p>
+          <p>Keep track of your current medications, dosages, and schedules. Set reminders for timely intake.</p>
+          <button style="background: #2ec4b6; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">💊 Manage</button>
+        </div>
+        
+        <div class="team-member">
+          <h3>🏥 Appointments</h3>
+          <p class="role">Upcoming Visits</p>
+          <p>View your upcoming appointments, reschedule if needed, and get reminders before each visit.</p>
+          <button style="background: #f4a261; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">📅 Schedule</button>
+        </div>
+        
+        <div class="team-member">
+          <h3>👨‍⚕️ Care Team</h3>
+          <p class="role">Healthcare Providers</p>
+          <p>Connect with your doctors, specialists, and healthcare team. Send messages and ask questions.</p>
+          <button style="background: #e63946; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem;">💬 Contact</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="achievements">
+      <h2>📋 Quick Actions</h2>
+      <div class="achievement-list">
+        <div class="achievement">
+          <span class="achievement-icon">📥</span>
+          <div>
+            <h3>Download Latest Report</h3>
+            <p>Get a PDF copy of your most recent blood test results from September 14, 2025</p>
+            <button style="background: #3498db; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 0.5rem;">📥 Download</button>
+          </div>
+        </div>
+        
+        <div class="achievement">
+          <span class="achievement-icon">📧</span>
+          <div>
+            <h3>Email Report to Family</h3>
+            <p>Send your latest health summary to family members via secure email</p>
+            <button style="background: #2ec4b6; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 0.5rem;">📧 Send</button>
+          </div>
+        </div>
+        
+        <div class="achievement">
+          <span class="achievement-icon">🗓️</span>
+          <div>
+            <h3>Schedule Follow-up</h3>
+            <p>Book your next appointment with Dr. Sarah Johnson for continued care</p>
+            <button style="background: #f4a261; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 0.5rem;">🗓️ Book Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Health Buddy. All rights reserved.</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

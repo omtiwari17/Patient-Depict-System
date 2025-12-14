@@ -1,0 +1,19 @@
+
+  <footer class="footer"><div class="container"></div></footer>
+  <script src="/static/app.js"></script>
+  <script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn){ logoutBtn.addEventListener('click', ()=>{ sessionStorage.clear(); location.href='index.html'; }); }
+    const editForm = document.getElementById('editAccountForm');
+    if (editForm){
+      editForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const resp = document.getElementById('editResponse');
+        if (resp){
+          resp.innerHTML = '<div style="color:#2ec4b6;font-weight:bold;padding:.8rem;background:#e8f5f3;border-radius:8px;border-left:4px solid #2ec4b6;">✅ Account details saved (demo)</div>';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

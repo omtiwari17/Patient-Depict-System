@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Admin Dashboard – Health Buddy</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="admin-dark">
+  <!-- Side Panel -->
+  <div class="side-panel">
+    <div class="panel-header">🛡️ Admin Portal</div>
+    <div class="panel-menu">
+      <button class="panel-btn"><span>🏠</span> Dashboard</button>
+      <button class="panel-btn"><span>👨‍⚕️</span> Doctors</button>
+      <button class="panel-btn"><span>👤</span> Patients</button>
+      <button class="panel-btn"><span>📧</span> Email Accounts</button>
+      <button class="panel-btn"><span>👁️</span> View Account</button>
+      <button class="panel-btn"><span>✏️</span> Edit Account</button>
+      <button class="panel-btn logout"><span>🚪</span> Logout</button>
+    </div>
+    <div class="panel-footer">Health Buddy &copy; 2025</div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content fade-in">
+    <div class="badge">Admin · Manage users & emails</div>
+    <h1 class="h2">Create accounts</h1>
+
+    <div class="grid" style="grid-template-columns: 1fr 1fr">
+      <!-- Doctor form -->
+      <form id="createDoctor" class="card">
+        <b class="accent">Create Doctor</b>
+        <div class="stack">
+          <input class="input" name="name" placeholder="Doctor name" required />
+          <input class="input" type="email" name="email" placeholder="email@hospital.org" required />
+          <input class="input" name="dept" placeholder="Department (e.g., Cardiology)" />
+          <button class="btn" type="submit">Create & send email</button>
+        </div>
+      </form>
+
+      <!-- Patient form -->
+      <form id="createPatient" class="card">
+        <b class="accent">Create Patient</b>
+        <div class="stack">
+          <input class="input" name="name" placeholder="Patient name" required />
+          <input class="input" type="email" name="email" placeholder="patient@email.com" required />
+          <input class="input" name="id" placeholder="Hospital ID (e.g., HB-10293)" required />
+          <button class="btn" type="submit">Create & send email</button>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="h2" style="margin-top:24px;">All accounts (demo)</h2>
+    <table class="table dash-table" style="width:100%;">
+      <thead>
+        <tr><th>Name</th><th>Email</th><th>Role</th><th>Action</th></tr>
+      </thead>
+      <tbody id="userList">
+        <tr><td>Dr. Meera Jain</td><td>meera@hospital.org</td><td>Doctor</td><td><a class="btn ghost" href="#">Reset password</a></td></tr>
+        <tr><td>Alex Doe</td><td>alex@demo.com</td><td>Patient</td><td><a class="btn ghost" href="#">Reset password</a></td></tr>
+      </tbody>
+    </table>
+
+    <p id="adminMsg" class="badge" style="margin-top:10px;"></p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container grid cols footer cols">
+      <div>
+        <h3 style="margin:0 0 6px;" class="accent">Health Buddy</h3>
+        <p class="sub">A friendly portal for report clarity, diet guidance & shareable health status.</p>
+        <span class="badge">Made with care • v0.1</span>
+      </div>
+      <div>
+        <b>Explore</b><br>
+        <a href="index.html">Home</a><br>
+        <a href="about.html">About</a><br>
+        <a href="care-plans.html">Care Plans</a><br>
+        <a href="status.html">Status</a>
+      </div>
+      <div>
+        <b>Legal</b><br>
+        <a href="privacy.html">Privacy</a><br>
+        <a href="terms.html">Terms</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating chat -->
+  <a class="chat-btn" aria-label="Open chat">💬</a>
+</div>
+
+<script src="app.js"></script>
+<script>
+  const m = document.getElementById('adminMsg');
+  const addRow = (name, email, role) => { 
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${name}</td><td>${email}</td><td>${role}</td><td><a class='btn ghost' href='#'>Reset password</a></td>`;
+    document.getElementById('userList').appendChild(tr);
+  }
+  document.getElementById('createDoctor').addEventListener('submit', e=>{
+    e.preventDefault(); const f = new FormData(e.target);
+    addRow(f.get('name'), f.get('email'), 'Doctor');
+    m.textContent = `Email invitation sent to Dr. ${f.get('name')} at ${f.get('email')}.`;
+    e.target.reset();
+  });
+  document.getElementById('createPatient').addEventListener('submit', e=>{
+    e.preventDefault(); const f = new FormData(e.target);
+    addRow(f.get('name'), f.get('email'), 'Patient');
+    m.textContent = `Welcome email sent to ${f.get('name')} at ${f.get('email')}.`;
+    e.target.reset();
+  });
+</script>
+</body>
+</html>

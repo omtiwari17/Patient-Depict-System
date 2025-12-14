@@ -1,0 +1,56 @@
+{% extends 'admin-base.html' %}
+{% block admin %}
+
+<main class="main-content fade-in">
+  <section class="section container reveal">
+    <h2 class="h2">👨‍⚕️ Doctors</h2>
+    <input
+      id="reportSearch"
+      class="input"
+      placeholder="🔎 Search doctors by name, specialty, email…"
+      style="max-width: 420px; margin: 0.8rem 0 1.2rem"
+    />
+
+    <div class="card">
+      
+      <table id="reportTable" class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Doctor ID</th>
+            <th>Name</th>
+            <th>Email ID</th>
+            <th>Phone</th>
+            <th>Department</th>
+            <th>Specialist In</th>
+            <th>License No</th>
+            <th>Experience (years)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for doc in doctor_data %}
+          <tr>
+            <td>{{ doc.id }}</td>
+            <td>{{ doc.doc_id }}</td>
+            <td>{{ doc.name }}</td>
+            <td>{{ doc.email }}</td>
+            <td>{{ doc.phone }}</td>
+            <td>{{ doc.department }}</td>
+            <td>{{ doc.specialist }}</td>
+            <td>{{ doc.license_no }}</td>
+            <td>{{ doc.experience }}</td>
+            <td>N/A</td>  {# you don't have a status field yet #}
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="10" style="text-align:center">No doctors found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

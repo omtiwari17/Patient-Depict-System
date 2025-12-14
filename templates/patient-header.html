@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Patient Dashboard – Health Buddy</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <aside class="side-panel">
+      <div class="panel-header">🩺 Patient Portal</div>
+      <nav class="panel-menu">
+        <a class="panel-btn active" href="/patient/dashboard/"
+          ><span>🏠</span> Dashboard</a
+        >
+        <a class="panel-btn" href="/patient/reports/"
+          ><span>📄</span> My Reports</a
+        >
+        <a class="panel-btn" href="/patient/status/"
+          ><span>🔁</span> Share Status</a
+        >
+        <a class="panel-btn" href="/patient/account-view/"
+          ><span>👁️</span> View Profile</a
+        >
+        <a class="panel-btn" href="/patient/account-edit/"
+          ><span>✏️</span> Edit Profile</a
+        >
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="panel-btn logout" type="submit">
+            <span>🚪</span> Logout
+          </button>
+        </form>
+      </nav>
+      <div class="panel-footer">Health Buddy © 2025</div>
+    </aside>
+  </body>
+</html>

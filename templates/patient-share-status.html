@@ -1,0 +1,49 @@
+{% extends 'patient-base.html' %} {% block patient %}
+
+<main class="main-content fade-in">
+  <section class="section container reveal">
+    <h2 class="h2">🔁 Share Status</h2>
+    <div class="card" style="margin-bottom: 1rem">
+      <h3 style="margin-top: 0">Current Status</h3>
+      <p class="status-text" style="margin: 0.5rem 0">
+        <strong>Status:</strong> {{ patient.status }}
+      </p>
+      <p
+        class="status-text"
+        style="white-space: pre-wrap; margin: 0.5rem 0 1rem"
+      >
+        {{ patient.status_notes|default:"No additional notes." }}
+      </p>
+
+      <div style="display: flex; gap: 0.5rem; align-items: center">
+        <input
+          id="shareLink"
+          class="input"
+          type="text"
+          readonly
+          value="{{ share_url|default:'' }}"
+          placeholder="Shareable link will appear here"
+          style="flex: 1"
+        />
+        <button class="btn" id="copyBtn" type="button">Copy Link</button>
+      </div>
+      <small class="muted" style="display: block; margin-top: 0.5rem"
+        >Anyone with the link can view this status.</small
+      >
+      <div
+        id="copyToast"
+        role="status"
+        aria-live="polite"
+        style="
+          display: none;
+          margin-top: 0.5rem;
+          color: var(--success, #138a36);
+        "
+      >
+        Link copied to clipboard
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

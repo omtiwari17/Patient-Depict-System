@@ -1,0 +1,180 @@
+:root {
+  --hb-primary: #357ABD;
+  --hb-secondary: #50e3c2;
+  --hb-bg: #cfe0f5;
+  --hb-card: #f0f6fc;
+  --text-900: #1a1a1a;
+  --text-700: #333;
+  --text-500: #555;
+  --ring: rgba(53,122,189, .3);
+  --radius: 16px;
+}
+
+/* Reset + Layout */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body.login-page {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: linear-gradient(135deg, #d9e9fa 0%, #cfe0f5 30%, #e6f2fa 60%, #d0e6f9 100%);
+  background-attachment: fixed;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* floating orb effects */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.5;
+  z-index: 0;
+}
+.orb.one {
+  width: 300px; height: 300px;
+  top: -80px; left: -80px;
+  background: radial-gradient(circle, #8ac6ff, transparent 70%);
+}
+.orb.two {
+  width: 240px; height: 240px;
+  bottom: -60px; right: -60px;
+  background: radial-gradient(circle, #50e3c2, transparent 70%);
+}
+.orb.three {
+  width: 180px; height: 180px;
+  top: 50%; left: 70%; transform: translate(-50%,-50%);
+  background: radial-gradient(circle, #a0d8ff, transparent 70%);
+}
+
+.shell {
+  width: min(1000px, 98vw);
+  min-height: 540px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0,0,0,.15);
+  overflow: hidden;
+  background: var(--hb-card);
+  position: relative;
+  z-index: 1;
+}
+
+.welcome {
+  padding: 40px;
+  background: var(--hb-primary);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.welcome h1 { font-size: 34px; margin: 0 0 12px; }
+.welcome p { font-size: 16px; line-height: 1.6; max-width: 48ch; }
+.welcome-footer { margin-top: auto; font-size: 14px; opacity: .9; }
+
+.panel {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--hb-card);
+}
+.back-btn {
+  align-self: flex-start;
+  margin-bottom: 12px;
+  border: 1.5px solid rgba(53, 122, 189, .35);
+  color: var(--hb-primary);
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .15s, box-shadow .2s, color .2s;
+}
+.back-btn:hover {
+  background: rgba(53,122,189,.08);
+  border-color: var(--hb-primary);
+  transform: translateY(-1px);
+}
+.back-btn:active { transform: translateY(0); }
+.back-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(53,122,189,.25);
+}
+.panel h2 { margin: 0; font-size: 26px; color: var(--text-900); }
+.muted { color: var(--text-500); font-size: 14px; margin: 8px 0 16px; }
+
+.role-tabs {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  background: #e0ecf9;
+  border-radius: 10px;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+.role-tabs button {
+  border: none;
+  background: transparent;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-700);
+  cursor: pointer;
+}
+.role-tabs button[aria-selected="true"] {
+  background: var(--hb-primary);
+  color: #fff;
+}
+
+form { display: grid; gap: 14px; }
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  font-size: 15px;
+}
+.input:focus {
+  border-color: var(--hb-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.continue {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--hb-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+.continue:hover { background: #2e68a1; }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+a { color: var(--hb-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.alert {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.alert.success { background-color: #142f14; color: #7fff7f; border: 1px solid #2f7f2f; }
+.alert.error { background-color: #2a1212; color: #ff7f7f; border: 1px solid #7f2f2f; }
+
+
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .welcome { display: none; }
+}

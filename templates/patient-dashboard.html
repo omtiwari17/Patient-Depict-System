@@ -1,0 +1,25 @@
+{% extends 'patient-base.html' %} {% block patient %}
+  <main class="main-content fade-in">
+    <section class="section container reveal">
+      <h1 class="h2">Hi, {{ patient.name }}</h1>
+      <p class="sub">Quick overview of your most relevant information.</p>
+
+      <div class="grid cards" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem;">
+        <div class="card hover-lift reveal">
+          <h3>Recent Reports</h3>
+          <p class="sub" id="dashboardReportsCount">1 Report</p>
+          <div id="dashboardReportsList" style="margin-top:.6rem;"></div>
+        </div>
+        <div class="card hover-lift reveal">
+          <h3>Next Appointment</h3>
+          <p class="sub" id="dashboardNextAppointment">No upcoming appointments.</p>
+        </div>
+        <div class="card hover-lift reveal">
+          <h3>Status</h3>
+          <p class="sub">{{ patient.status }}</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+{% endblock %}

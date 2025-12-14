@@ -1,0 +1,93 @@
+{% extends 'doctor-base.html' %} {% block doctor %}
+
+<main class="main-content fade-in">
+  <section class="section container reveal">
+    <h2 class="h2">🔄 Update Patient Status</h2>
+    <form
+      action="{% url 'doctor-status-update' %}"
+      method="post"
+      class="card"
+      style="padding: 1.4rem; border-radius: 12px"
+    >
+      {% csrf_token %}
+      <div style="margin-bottom: 1rem">
+        <label
+          for="statusPatient"
+          style="
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+          "
+          >Select Patient</label
+        >
+        <select id="statusPatient" name="patient" required class="input">
+          <option value="">Choose a patient</option>
+          {% for p in patients %}
+          <option value="{{ p.id }}">{{ p.patient_id }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <label
+          for="status"
+          style="
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+          "
+          >Health Status</label
+        >
+        <select id="status" name="status" required class="input">
+          <option value="">Select status</option>
+          <option>Active</option>
+          <option>Admitted</option>
+          <option>In ICU</option>
+          <option>In HDU</option>
+          <option>Critical</option>
+          <option>Serious</option>
+          <option>Stable</option>
+          <option>Recovering</option>
+          <option>Under Observation</option>
+          <option>Outpatient</option>
+          <option>Discharged</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 1rem">
+        <label
+          for="statusNotes"
+          style="
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+          "
+          >Status Notes</label
+        >
+        <textarea
+          id="statusNotes"
+          name="statusNotes"
+          rows="3"
+          class="input"
+          placeholder="Explain the reason for status change..."
+          style="resize: vertical"
+        ></textarea>
+      </div>
+      {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <button type="submit" class="btn-submit">✅ Save Update</button>
+      <div id="statusResponse" style="margin-top: 0.8rem"></div>
+    </form>
+  </section>
+</main>
+
+{% endblock %}

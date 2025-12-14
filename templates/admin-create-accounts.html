@@ -1,0 +1,251 @@
+{% extends 'admin-base.html' %} {% block admin %}
+<main class="main-content fade-in">
+  <section class="section container reveal">
+    <h2 class="h2">✏️ Create Accounts</h2>
+
+    <!-- Create Doctor -->
+    <form
+      action="{% url 'save_doctor' %}"
+      method="POST"
+      style="padding: 1.2rem; border-radius: 12px; margin-bottom: 1.4rem"
+    >
+      {% csrf_token %}
+      <h3 class="accent" style="margin-top: 0">👨‍⚕️ Add Doctor</h3>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.8rem">
+        <div>
+          <label for="d_id">Doctor ID</label>
+          <input
+            id="d_id"
+            name="doctorId"
+            class="input"
+            placeholder="e.g., DOC-2025-0042"
+            required
+          />
+        </div>
+        <div>
+          <label for="d_name">Name</label>
+          <input id="d_name" name="name" class="input" required />
+        </div>
+        <div>
+          <label for="d_email">Email</label>
+          <input
+            id="d_email"
+            name="email"
+            type="email"
+            class="input"
+            required
+          />
+        </div>
+        <div>
+          <label for="d_phone">Phone</label>
+          <input
+            id="d_phone"
+            name="phone"
+            class="input"
+            placeholder="e.g., +91 55512-34567"
+          />
+        </div>
+        <div>
+          <label for="d_department">Department</label>
+          <input
+            id="d_department"
+            name="department"
+            class="input"
+            placeholder="e.g., Cardiology"
+            required
+          />
+        </div>
+        <div>
+          <label for="d_specialist">Specialist</label>
+          <input
+            id="d_specialist"
+            name="specialist"
+            class="input"
+            placeholder="e.g., Interventional Cardiologist"
+            required
+          />
+        </div>
+        <div>
+          <label for="d_license">License No.</label>
+          <input
+            id="d_license"
+            name="license"
+            class="input"
+            placeholder="e.g., MCI/2025/123456"
+          />
+        </div>
+        <div>
+          <label for="d_experience">Experience (years)</label>
+          <input
+            id="d_experience"
+            name="experience"
+            type="number"
+            min="0"
+            class="input"
+            placeholder="e.g., 8"
+          />
+        </div>
+        <div>
+          <label for="d_experience">Status</label>
+          <select id="doctorStatus" name="doctorStatus" class="input">
+            <option value="">Select Status</option>
+            <option>Active</option>
+            <option>In OPD</option>
+            <option>In Surgery</option>
+            <option>In ICU</option>
+            <option>In Ward Round</option>
+            <option>On Call</option>
+            <option>Emergency Duty</option>
+            <option>On Leave</option>
+            <option>Off Duty</option>
+            <option>Unavailable</option>
+            <option>Suspended</option>
+            <option>Retired</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn">Add Doctor</button>
+      <div id="doctorCreateResponse" style="margin-top: 1rem"></div>
+      {% for message in messages %} {% if "doctor" in message.tags %}
+      <div class="alert success">{{ message }}</div>
+      {% endif %} {% endfor %}
+    </form>
+
+    <hr class="divider" style="margin: 1.4rem 0; opacity: 0.25" />
+
+    <!-- Create Patient -->
+    <form
+      action="{% url 'save_patient' %}"
+      method="POST"
+      style="padding: 1.2rem; border-radius: 12px; margin-bottom: 1.4rem"
+    >
+      {% csrf_token %}
+      <h3 class="accent" style="margin-top: 0">🧑‍🤝‍🧑 Add Patient</h3>
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.8rem">
+        <div>
+          <label for="p_name">Name</label>
+          <input id="p_name" name="name" class="input" required />
+        </div>
+        <div>
+          <label for="p_email">Email</label>
+          <input
+            id="p_email"
+            name="email"
+            type="email"
+            class="input"
+            required
+          />
+        </div>
+        <div>
+          <label for="p_phone">Phone</label>
+          <input
+            id="p_phone"
+            name="phone"
+            class="input"
+            placeholder="e.g., +91 55598-76543"
+          />
+        </div>
+        <div>
+          <label for="patientId">Patient ID</label>
+          <input
+            id="patientId"
+            name="patientId"
+            class="input"
+            placeholder="e.g., HB-2025-0012"
+            required
+          />
+        </div>
+        <div>
+          <label for="age">Age</label>
+          <input
+            id="age"
+            name="age"
+            type="number"
+            min="0"
+            class="input"
+            placeholder="e.g., 34"
+            required
+          />
+        </div>
+        <div>
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" class="input">
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+        <div>
+          <label for="bloodGroup">Blood Group</label>
+          <select id="bloodGroup" name="bloodGroup" class="input">
+            <option value="">Select</option>
+            <option>O+</option>
+            <option>O-</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="address">Address</label>
+          <textarea
+            id="address"
+            name="address"
+            class="input"
+            rows="3"
+            placeholder="Full Address"
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label for="disease">Disease Name</label>
+          <input
+            id="disease"
+            name="disease"
+            class="input"
+            placeholder="e.g., Type 2 Diabetes"
+            required
+          />
+        </div>
+        <div>
+          <label for="doctor">Doctor ID</label>
+          <select id="doctor" name="doctor_id" class="input" required>
+            <option value="">Select</option>
+            {% for id in doc_id %}
+            <option value="{{id.doc_id}}">{{id.doc_id}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="d_experience">Status</label>
+          <select id="patientStatus" name="patientStatus" class="input">
+            <option value="">Select Status</option>
+            <option>Admitted</option>
+            <option>In ICU</option>
+            <option>In HDU</option>
+            <option>Critical</option>
+            <option>Serious</option>
+            <option>Stable</option>
+            <option>Recovering</option>
+            <option>Under Observation</option>
+            <option>Outpatient</option>
+            <option>Discharged</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn">Create Patient</button>
+      <div id="patientCreateResponse" style="margin-top: 1rem"></div>
+      {% for message in messages %} {% if "patient" in message.tags %}
+      <div class="alert success">{{ message }}</div>
+      {% endif %} {% endfor %}
+    </form>
+    <hr class="divider" style="margin: 1.4rem 0; opacity: 0.25" />
+  </section>
+</main>
+
+{% endblock %}

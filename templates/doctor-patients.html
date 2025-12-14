@@ -1,0 +1,49 @@
+{% extends 'doctor-base.html' %} {% block doctor %}
+
+  <main class="main-content fade-in">
+    <section class="section container reveal">
+      <h2 class="h2">👥 Patients</h2>
+      <input type="text" id="reportSearch" placeholder="🔍 Search patients..." class="input" style="margin:.8rem 0 1.2rem 0;"/>
+
+      <div class="table card">
+        <table id="reportTable" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr style="background:#f8f9fa;">
+              <th style="padding:.9rem;border-bottom:2px solid #e8f0fe;text-align:left;">Patient Name</th>
+              <th style="padding:.9rem;border-bottom:2px solid #e8f0fe;text-align:left;">Status</th>
+              <th style="padding:.9rem;border-bottom:2px solid #e8f0fe;text-align:left;">Last Visit</th>
+              <th style="padding:.9rem;border-bottom:2px solid #e8f0fe;text-align:left;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">John Smith</td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">
+                <span style="background:#e8f5f3;color:#2ec4b6;padding:.25rem .7rem;border-radius:999px;font-size:.85rem;font-weight:700;border:2px solid #2ec4b6;">Good</span>
+              </td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">2025-09-10</td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;"><a href="#" style="color:#3498db;">View</a></td>
+            </tr>
+            <tr>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">Sarah Johnson</td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">
+                <span style="background:#fef9e6;color:#e1a800;padding:.25rem .7rem;border-radius:999px;font-size:.85rem;font-weight:700;border:2px solid #e1a800;">Stable</span>
+              </td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">2025-09-08</td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;"><a href="#" style="color:#3498db;">View</a></td>
+            </tr>
+            <tr>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">Michael Brown</td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">
+                <span style="background:#fdeaea;color:#e63946;padding:.25rem .7rem;border-radius:999px;font-size:.85rem;font-weight:700;border:2px solid #e63946;">Critical</span>
+              </td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;">2025-09-14</td>
+              <td style="padding:.9rem;border-bottom:1px solid #e8f0fe;"><a href="#" style="color:#3498db;">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+{% endblock %}
