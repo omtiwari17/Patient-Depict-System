@@ -8,16 +8,16 @@
       {{doc_obj}}
       <div class="grid cards">
         <div class="card hover-lift reveal">
-          <h3>Today’s Reports</h3>
-          <p class="sub">2 uploaded</p>
+          <h3>Specialist</h3>
+          <p class="sub">{{ request.session.doctor_specialist }}</p>
         </div>
         <div class="card hover-lift reveal">
-          <h3>Pending Status</h3>
-          <p class="sub">2 patients awaiting review</p>
+          <h3>Experience</h3>
+          <p class="sub">{{ request.session.doctor_experience }}</p>
         </div>
         <div class="card hover-lift reveal">
-          <h3>Unseen Messages</h3>
-          <p class="sub">1 family follow-ups</p>
+          <h3>Gmail ID</h3>
+          <p class="sub">{{ request.session.doctor_session }}</p>
         </div>
       </div>
     </section>

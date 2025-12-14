@@ -6,13 +6,13 @@
 
       <div class="grid cards" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem;">
         <div class="card hover-lift reveal">
-          <h3>Recent Reports</h3>
-          <p class="sub" id="dashboardReportsCount">1 Report</p>
+          <h3>Email ID</h3>
+          <p class="sub" id="dashboardReportsCount">{{ request.session.patient_session }}</p>
           <div id="dashboardReportsList" style="margin-top:.6rem;"></div>
         </div>
         <div class="card hover-lift reveal">
-          <h3>Next Appointment</h3>
-          <p class="sub" id="dashboardNextAppointment">No upcoming appointments.</p>
+          <h3>Disease</h3>
+          <p class="sub" id="dashboardNextAppointment">{{ request.session.patient_disease }}</p>
         </div>
         <div class="card hover-lift reveal">
           <h3>Status</h3>

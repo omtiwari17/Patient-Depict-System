@@ -34,3 +34,10 @@ class Report(models.Model):
     file = models.FileField(upload_to='reports/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
+class contact_us(models.Model):
+    firstname= models.CharField(max_length=100)
+    lastname= models.CharField(max_length=100)
+    email= models.EmailField()
+    priorty= models.CharField(max_length=50)
+    subject= models.CharField(max_length=200)
+    message= models.TextField()

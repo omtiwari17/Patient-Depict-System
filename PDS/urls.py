@@ -27,12 +27,17 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
+    path('contact/submit/', views.contact_us_form, name='contact-submit'),
     
     path('admin1/dashboard/', views.admin, name='adminpage'),
     path('admin1/accounts/create/', views.admin_acc_create, name='admin-create-accounts'),
     path('admin1/doctor/', views.admin_doctor, name='admin-doctor'),
     path('admin1/patients/', views.admin_patients, name='admin-patients'),
     path('admin1/accounts/edit/', views.admin_acc_edit, name='admin-edit-accounts'),
+    path('admin1/accounts/edit/doctor/search/', views.admin_lookup_doctor, name='admin-lookup-doctor'),
+    path('admin1/accounts/edit/patient/search/', views.admin_lookup_patient, name='admin-lookup-patient'),
+    path('admin1/accounts/edit/doctor/update/', views.admin_update_doctor, name='admin-update-doctor'),
+    path('admin1/accounts/edit/patient/update/', views.admin_update_patient, name='admin-update-patient'),
 
     path('doctor/dashboard/', views.doctor_dashboard, name='doctor-dashboard'),
     path('doctor/account-edit/', views.doctor_account_edit, name='doctor-account-edit'),

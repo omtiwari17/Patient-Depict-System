@@ -56,6 +56,107 @@ def admin_patients(request):
 
     return render(request, "admin-patients.html", {'patient_data': patient_data})
 
+
+# ========= Admin: Lookup & Update Accounts (by email) ========= #
+@require_GET
+def admin_lookup_doctor(request):
+    email = (request.GET.get('email') or '').strip().lower()
+    if not email:
+        return JsonResponse({'ok': False, 'error': 'Email is required'}, status=400)
+    try:
+        d = create_doctor.objects.get(email=email)
+        payload = {
+            'doc_id': d.doc_id,
+            'name': d.name,
+            'email': d.email,
+            'phone': d.phone,
+            'department': d.department,
+            'specialist': d.specialist,
+            'license_no': d.license_no,
+            'experience': d.experience,
+        }
+        return JsonResponse({'ok': True, 'doctor': payload})
+    except create_doctor.DoesNotExist:
+        return JsonResponse({'ok': False, 'error': 'Doctor not found'}, status=404)
+
+
+@require_GET
+def admin_lookup_patient(request):
+    email = (request.GET.get('email') or '').strip().lower()
+    if not email:
+        return JsonResponse({'ok': False, 'error': 'Email is required'}, status=400)
+    try:
+        p = create_patient.objects.select_related('doctor').get(email=email)
+        payload = {
+            'patient_id': p.patient_id,
+            'name': p.name,
+            'email': p.email,
+            'phone': p.phone,
+            'age': p.age,
+            'address': p.address,
+            'gender': p.gender,
+            'blood_group': p.blood_group,
+            'disease': p.disease,
+            'status': getattr(p, 'status', ''),
+            'doctor_doc_id': getattr(p.doctor, 'doc_id', '') if p.doctor_id else '',
+        }
+        return JsonResponse({'ok': True, 'patient': payload})
+    except create_patient.DoesNotExist:
+        return JsonResponse({'ok': False, 'error': 'Patient not found'}, status=404)
+
+
+@require_POST
+def admin_update_doctor(request):
+    email = (request.POST.get('doctorEmail') or '').strip().lower()
+    if not email:
+        return JsonResponse({'ok': False, 'message': 'Email is required'}, status=400)
+    try:
+        d = create_doctor.objects.get(email=email)
+        d.doc_id = request.POST.get('doctorId') or d.doc_id
+        d.name = request.POST.get('doctorName') or d.name
+        d.department = request.POST.get('doctorDepartment') or d.department
+        d.specialist = request.POST.get('doctorSpecialist') or d.specialist
+        d.license_no = request.POST.get('doctorLicense') or d.license_no
+        exp = request.POST.get('doctorExperience')
+        d.experience = int(exp) if (exp and exp.isdigit()) else d.experience
+        d.phone = request.POST.get('doctorPhone') or d.phone
+        d.save()
+        return JsonResponse({'ok': True, 'message': 'Doctor updated successfully'})
+    except create_doctor.DoesNotExist:
+        return JsonResponse({'ok': False, 'message': 'Doctor not found'}, status=404)
+
+
+@require_POST
+def admin_update_patient(request):
+    email = (request.POST.get('patientEmail') or '').strip().lower()
+    if not email:
+        return JsonResponse({'ok': False, 'message': 'Email is required'}, status=400)
+    try:
+        p = create_patient.objects.get(email=email)
+        p.patient_id = request.POST.get('patientId') or p.patient_id
+        p.name = request.POST.get('patientName') or p.name
+        p.phone = request.POST.get('patientPhone') or p.phone
+        age = request.POST.get('patientAge')
+        p.age = int(age) if (age and age.isdigit()) else p.age
+        p.gender = request.POST.get('patientGender') or p.gender
+        p.blood_group = request.POST.get('patientBloodGroup') or p.blood_group
+        p.address = request.POST.get('patientAddress') or p.address
+        p.disease = request.POST.get('patientDisease') or p.disease
+        doc_code = request.POST.get('assignedDoctor')
+        if doc_code:
+            try:
+                doc = create_doctor.objects.get(doc_id=doc_code)
+                p.doctor = doc
+            except create_doctor.DoesNotExist:
+                pass
+        status = request.POST.get('patientStatus')
+        if status:
+            p.status = status
+        p.save()
+        return JsonResponse({'ok': True, 'message': 'Patient updated successfully'})
+    except create_patient.DoesNotExist:
+        return JsonResponse({'ok': False, 'message': 'Patient not found'}, status=404)
+
 def doctor_dashboard(request):
     return render(request, "doctor-dashboard.html")
 
@@ -331,6 +432,8 @@ def role_login(request, role: str):
         request.session['doctor_name'] = doc_obj
         request.session['doctor_session'] = email
         request.session['doctor_id'] = doc[0]['doc_id']
+        request.session['doctor_experience'] = doc[0]['experience']
+        request.session['doctor_specialist'] = doc[0]['specialist']
         return redirect("/doctor/dashboard/")
 
     elif 'patient' in ALLOWED_ROLES and pat:
@@ -338,6 +441,7 @@ def role_login(request, role: str):
         request.session['patient_session'] = email
         request.session['patient_name'] = pat_obj
         request.session['patient_id'] = pat[0]['patient_id']
+        request.session['patient_disease'] = pat[0]['disease']
         return redirect("/patient/dashboard/")
     
     else:
@@ -425,6 +529,23 @@ def update_patient_acc(request):
         messages.success(request, "Account details updated successfully.")
 
         return redirect('patient-account-edit')
+
+def contact_us_form(request):
+    if request.method == "POST":
+        firstname= request.POST.get('firstname')
+        lastname= request.POST.get('lastname')
+        email= request.POST.get('email')
+        priorty= request.POST.get('priorty')
+        subject= request.POST.get('subject')
+        message= request.POST.get('message')
+
+        sav= contact_us(firstname=firstname, lastname=lastname, email=email, priorty=priorty, subject=subject, message=message)
+        sav.save()
+
+        messages.success(request, "Your message has been sent successfully. We will get back to you soon.")
+
+        return redirect("contact")
+
 
 def upload_report(request):
     if request.method == "POST":

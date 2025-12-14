@@ -45,47 +45,47 @@
       <span class="kicker bounce-in">Our Features</span>
       <h2 class="h2 text-focus-in">Comprehensive Healthcare Solutions</h2>
       <p class="sub slide-up">
-        Everything you need for modern healthcare management in one platform.
+        Everything you need for modern, secure healthcare management in one platform.
       </p>
     </div>
-    <div class="grid cards">
+      <div class="grid cards">
       <div class="card reveal hover-lift float-animation">
         <div class="icon feature-icon rotate-on-hover">🤖</div>
-        <h3>AI-Powered Analysis</h3>
+        <h3>Role-Based Authentication</h3>
         <p>
-          Transform complex medical reports into clear, understandable summaries
-          using advanced artificial intelligence.
+          Secure access tailored to each role with session-backed authentication
+          for patients, doctors, and administrators.
         </p>
         <ul class="feature-list">
-          <li class="staggered-fade">✓ Instant report translation</li>
-          <li class="staggered-fade">✓ Key insights highlighting</li>
-          <li class="staggered-fade">✓ Risk assessment</li>
-        </ul>
-      </div>
-      <div class="card reveal hover-lift float-animation">
-        <div class="icon feature-icon rotate-on-hover">🥗</div>
-        <h3>Smart Nutrition</h3>
-        <p>
-          Receive personalized diet recommendations tailored to your specific
-          health conditions and medical history.
-        </p>
-        <ul class="feature-list">
-          <li class="staggered-fade">✓ Custom meal plans</li>
-          <li class="staggered-fade">✓ Nutritional tracking</li>
-          <li class="staggered-fade">✓ Health goal alignment</li>
+          <li class="staggered-fade">✓ Patient, Doctor, Admin roles</li>
+          <li class="staggered-fade">✓ Protected dashboards and actions</li>
+          <li class="staggered-fade">✓ Session-aware status display</li>
         </ul>
       </div>
       <div class="card reveal hover-lift float-animation">
         <div class="icon feature-icon rotate-on-hover">🔗</div>
-        <h3>Secure Sharing</h3>
+        <h3>Shareable Family Links</h3>
         <p>
-          Generate secure, shareable links for family members to stay updated on
-          your health status without compromising privacy.
+          Generate secure, time-bound links so family members can view a
+          patient’s current health status without exposing full records.
         </p>
         <ul class="feature-list">
           <li class="staggered-fade">✓ One-click link generation</li>
-          <li class="staggered-fade">✓ Privacy controls</li>
-          <li class="staggered-fade">✓ Real-time updates</li>
+          <li class="staggered-fade">✓ Signed tokens</li>
+          <li class="staggered-fade">✓ Copy and share with ease</li>
+        </ul>
+      </div>
+      <div class="card reveal hover-lift float-animation">
+        <div class="icon feature-icon rotate-on-hover">🛡️</div>
+        <h3>Privacy-First Data Exposure</h3>
+        <p>
+          Share only what matters: minimal, read-only status views designed to
+          protect sensitive health information.
+        </p>
+        <ul class="feature-list">
+          <li class="staggered-fade">✓ Least-privilege public views</li>
+          <li class="staggered-fade">✓ No PHI in shared pages</li>
+          <li class="staggered-fade">✓ Revocation-ready design</li>
         </ul>
       </div>
     </div>
@@ -143,10 +143,15 @@
             <li class="staggered-fade">✓ Simple onboarding</li>
           </ul>
         </div>
-
+      </div>
+      <style>
+        .cards-row-center { display:flex; justify-content:center; margin-top:2rem; }
+        .cards-row-center .card { max-width:360px; width:100%; }
+      </style>
+      <div class="cards-row-center">
         <div class="card reveal hover-lift float-animation">
           <div class="icon feature-icon rotate-on-hover">👪</div>
-          <h3 class="slide-in-right">For Families</h3>
+          <h3 class="slide-up">For Families</h3>
           <p>
             Stay connected with your loved ones’ health journey through secure,
             real-time status updates.
@@ -158,6 +163,7 @@
           </ul>
         </div>
       </div>
+      </div>
     </div>
   </section>
 
@@ -168,15 +174,14 @@
       <span class="kicker bounce-in">Process Flow</span>
       <h2 class="h2 text-focus-in">From Registration to Care</h2>
       <p class="sub slide-up">
-        A seamless journey from account setup to ongoing health management.
+        Clear steps from account setup to secure status sharing.
       </p>
     </div>
     <div class="timeline">
       <div class="step reveal hover-lift">
         <div class="bubble scale-on-hover">
           <span class="badge pulse-glow">1</span>
-          Admin creates doctor and patient accounts; automated email
-          notifications are sent.
+          Admin creates doctor and patient accounts; login details are shared securely.
         </div>
         <div></div>
       </div>
@@ -184,33 +189,31 @@
         <div></div>
         <div class="bubble scale-on-hover">
           <span class="badge pulse-glow">2</span>
-          Doctors upload patient reports and update health status information.
+          Role-based authentication grants access to patient, doctor, and admin dashboards.
         </div>
       </div>
       <div class="step reveal hover-lift">
         <div class="bubble scale-on-hover">
           <span class="badge pulse-glow">3</span>
-          AI analyzes reports and provides clear, understandable health
-          summaries.
+          Doctors update patient health status.
         </div>
         <div></div>
       </div>
       <div class="step reveal hover-lift">
-        <div></div>
         <div class="bubble scale-on-hover">
           <span class="badge pulse-glow">4</span>
-          Patients generate secure links to share health status with family
-          members.
+          Patients generate secure, signed links to share status with family.
         </div>
+        <div></div>
       </div>
     </div>
 
     <div class="band reveal hover-glow">
       <div>
         <b>Ready to get started?</b>
-        Create your account today and experience modern healthcare management.
+        Use role-based access to manage care and share status securely.
       </div>
-      <a class="pill alt pulse-glow" href="admin.html">Get Started</a>
+      <a class="pill alt pulse-glow" href="/login/">Get Started</a>
     </div>
   </section>
 </main>

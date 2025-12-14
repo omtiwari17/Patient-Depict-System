@@ -8,7 +8,7 @@
           Let’s talk about your health tech
         </h1>
         <p class="sub slide-up reveal">
-          Questions, support, partnerships—drop us a line and we’ll get back
+          Questions, support, partnerships drop us a line and we’ll get back
           within 24 hours.
         </p>
       </div>
@@ -23,7 +23,7 @@
             <div class="contact-avatar">📧</div>
             <div class="contact-body">
               <h3>Email Support</h3>
-              <p class="accent">support@healthbuddy.com</p>
+              <p class="accent">support@pds.com</p>
               <small>We reply within 24 hours on business days.</small>
             </div>
           </div>
@@ -32,7 +32,7 @@
             <div class="contact-avatar">📞</div>
             <div class="contact-body">
               <h3>Phone</h3>
-              <p class="accent">+1 (555) 123-4567</p>
+              <p class="accent">+91 88475 96578</p>
               <small>Mon–Fri, 9:00–18:00</small>
             </div>
           </div>
@@ -41,7 +41,7 @@
             <div class="contact-avatar">🏢</div>
             <div class="contact-body">
               <h3>Office</h3>
-              <p class="accent">123 Health Tech Blvd, NY 10001</p>
+              <p class="accent">Indore</p>
               <small>Visits by appointment only.</small>
             </div>
           </div>
@@ -50,14 +50,15 @@
             <div class="contact-avatar">🚨</div>
             <div class="contact-body">
               <h3>Emergency</h3>
-              <p class="accent">emergency@healthbuddy.com</p>
+              <p class="accent">emergency@pds.com</p>
               <small>Critical production issues only.</small>
             </div>
           </div>
         </div>
 
         <!-- Form column -->
-        <form id="contactForm" class="form contact-form reveal hover-glow">
+        <form method="POST" action="{% url 'contact-submit' %}" class="form contact-form reveal hover-glow">
+          {% csrf_token %}
           <h2 class="text-focus-in">Send us a message</h2>
 
           <div class="form-field">
@@ -121,12 +122,7 @@
             <textarea id="message" name="message" rows="6" required></textarea>
           </div>
 
-          <div class="form-check full">
-            <input type="checkbox" id="newsletter" name="newsletter" />
-            <label for="newsletter"
-              ><i class="fas fa-bell"></i> Subscribe to product updates</label
-            >
-          </div>
+          
 
           <button type="submit" class="btn-submit pulse-glow">
             <i class="fas fa-paper-plane"></i> Send Message
@@ -143,23 +139,16 @@
           <div class="faq-item reveal">
             <h3>Is my health data secure?</h3>
             <p>
-              Yes—bank-level encryption and strict access controls are baked in.
+              Yes bank-level encryption and strict access controls are baked in.
             </p>
           </div>
           <div class="faq-item reveal">
-            <h3>How accurate is the AI?</h3>
-            <p>
-              We target robust, clinician-reviewed summaries with continuous
-              model tuning.
-            </p>
+            <h3>How can family members view patient updates?</h3>
+            <p>Patients can generate a secure token-based link to share updates with family.</p>
           </div>
           <div class="faq-item reveal">
-            <h3>Can I share reports with family?</h3>
-            <p>Yes—create secure, revokable links with privacy controls.</p>
-          </div>
-          <div class="faq-item reveal">
-            <h3>What formats are supported?</h3>
-            <p>PDF, DOCX, and common image formats.</p>
+            <h3>Who can update patient health status?</h3>
+            <p>Patients and doctors can update health status, while admins manage overall access.</p>
           </div>
         </div>
       </section>
@@ -167,6 +156,5 @@
 
     <!-- Login modal removed: use dedicated /login/ page -->
 
-    <div class="wave-bottom"></div>
 
 {% endblock %}

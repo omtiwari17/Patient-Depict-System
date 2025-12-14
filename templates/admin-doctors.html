@@ -25,7 +25,6 @@
             <th>Specialist In</th>
             <th>License No</th>
             <th>Experience (years)</th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -40,11 +39,10 @@
             <td>{{ doc.specialist }}</td>
             <td>{{ doc.license_no }}</td>
             <td>{{ doc.experience }}</td>
-            <td>N/A</td>  {# you don't have a status field yet #}
           </tr>
           {% empty %}
           <tr>
-            <td colspan="10" style="text-align:center">No doctors found.</td>
+            <td colspan="9" style="text-align:center">No doctors found.</td>
           </tr>
           {% endfor %}
         </tbody>

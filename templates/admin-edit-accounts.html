@@ -7,9 +7,12 @@
     <!-- ======================= EDIT DOCTOR FORM ======================= -->
     <form
       id="editDoctorForm"
+      action="{% url 'admin-update-doctor' %}"
+      method="post"
       class="card"
       style="padding: 1.2rem; border-radius: 12px; margin-bottom: 2rem"
     >
+      {% csrf_token %}
       <h3 class="accent">🩺 Edit Doctor</h3>
 
       <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.8rem">
@@ -22,6 +25,7 @@
             placeholder="doctor@domain.com"
             required
           />
+          <button type="button" class="btn" id="doctorSearchBtn" style="margin-top:.4rem">Search</button>
         </div>
         <div>
           <label for="doctorStatus">Status</label>
@@ -101,9 +105,12 @@
     <!-- ======================= EDIT PATIENT FORM ======================= -->
     <form
       id="editPatientForm"
+      action="{% url 'admin-update-patient' %}"
+      method="post"
       class="card"
       style="padding: 1.2rem; border-radius: 12px"
     >
+      {% csrf_token %}
       <h3 class="accent">🧍‍♂️ Edit Patient</h3>
 
       <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.8rem">
@@ -116,13 +123,22 @@
             placeholder="patient@domain.com"
             required
           />
+          <button type="button" class="btn" id="patientSearchBtn" style="margin-top:.4rem">Search</button>
         </div>
         <div>
           <label for="patientStatus">Status</label>
           <select id="patientStatus" name="patientStatus" class="input">
             <option value="">Select Status</option>
             <option>Active</option>
-            <option>Suspended</option>
+            <option>Admitted</option>
+            <option>In ICU</option>
+            <option>In HDU</option>
+            <option>Critical</option>
+            <option>Serious</option>
+            <option>Stable</option>
+            <option>Recovering</option>
+            <option>Under Observation</option>
+            <option>Outpatient</option>
             <option>Discharged</option>
           </select>
         </div>
@@ -216,5 +232,76 @@
     </form>
   </section>
 </main>
+
+<script>
+  (function(){
+    const $ = (q,s=document)=>s.querySelector(q);
+    const doctorBtn = $('#doctorSearchBtn');
+    const patientBtn = $('#patientSearchBtn');
+
+    function showMsg(el, text, ok=true){ if(!el) return; el.innerHTML = `<div style="color:${ok?'#2ec4b6':'#e63946'};font-weight:700;">${text}</div>` }
+
+    function fillDoctor(d){
+      $('#doctorId').value = d.doc_id || '';
+      $('#doctorName').value = d.name || '';
+      $('#doctorDepartment').value = d.department || '';
+      $('#doctorSpecialist').value = d.specialist || '';
+      $('#doctorLicense').value = d.license_no || '';
+      $('#doctorExperience').value = d.experience ?? '';
+      $('#doctorPhone').value = d.phone || '';
+    }
+
+    function fillPatient(p){
+      $('#patientId').value = p.patient_id || '';
+      $('#patientName').value = p.name || '';
+      $('#patientPhone').value = p.phone || '';
+      $('#patientAge').value = p.age ?? '';
+      $('#patientGender').value = p.gender || '';
+      $('#patientBloodGroup').value = p.blood_group || '';
+      $('#patientAddress').value = p.address || '';
+      $('#patientDisease').value = p.disease || '';
+      $('#assignedDoctor').value = (p.doctor && p.doctor.doc_id) ? p.doctor.doc_id : (p.doctor_doc_id || '');
+      if (p.status) $('#patientStatus').value = p.status;
+    }
+
+    async function getJSON(url){
+      const res = await fetch(url, {credentials:'same-origin'});
+      return await res.json();
+    }
+
+    if (doctorBtn){
+      doctorBtn.addEventListener('click', async ()=>{
+        const email = $('#doctorEmail').value.trim();
+        if(!email) return;
+        const data = await getJSON(`{% url 'admin-lookup-doctor' %}?email=${encodeURIComponent(email)}`);
+        if (data.ok){ fillDoctor(data.doctor); showMsg($('#doctorEditResponse'), 'Doctor loaded'); }
+        else { showMsg($('#doctorEditResponse'), data.error || 'Not found', false); }
+      });
+    }
+
+    if (patientBtn){
+      patientBtn.addEventListener('click', async ()=>{
+        const email = $('#patientEmail').value.trim();
+        if(!email) return;
+        const data = await getJSON(`{% url 'admin-lookup-patient' %}?email=${encodeURIComponent(email)}`);
+        if (data.ok){ fillPatient(data.patient); showMsg($('#patientEditResponse'), 'Patient loaded'); }
+        else { showMsg($('#patientEditResponse'), data.error || 'Not found', false); }
+      });
+    }
+
+    // AJAX submit for smoother UX
+    function getCookie(name){ const m=document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)'); return m?decodeURIComponent(m[2]):null; }
+    async function ajaxSubmit(form, msgBox){
+      const fd = new FormData(form);
+      const res = await fetch(form.action, {method:'POST', body:fd, headers:{'X-CSRFToken': getCookie('csrftoken')}, credentials:'same-origin'});
+      const data = await res.json();
+      showMsg(msgBox, data.message || (data.ok?'Saved':'Failed'), !!data.ok);
+    }
+    const doctorForm = document.getElementById('editDoctorForm');
+    const patientForm = document.getElementById('editPatientForm');
+    if (doctorForm){ doctorForm.addEventListener('submit', (e)=>{ e.preventDefault(); ajaxSubmit(doctorForm, document.getElementById('doctorEditResponse')); }); }
+    if (patientForm){ patientForm.addEventListener('submit', (e)=>{ e.preventDefault(); ajaxSubmit(patientForm, document.getElementById('patientEditResponse')); }); }
+  })();
+</script>
 
 {% endblock %}
