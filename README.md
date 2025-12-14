@@ -91,7 +91,7 @@ Data structures are designed with **HL7 FHIR alignment in mind** for future inte
 ```bash
 # Clone the repository
 git clone https://github.com/omtiwari17/Patient-Depict-System
-cd patient-depict-system
+cd Patient-Depict-System
 
 # Create virtual environment
 python -m venv venv
