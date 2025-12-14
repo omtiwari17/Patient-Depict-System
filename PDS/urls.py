@@ -48,6 +48,10 @@ urlpatterns = [
     path('patient/account-view/', views.patient_account_view, name='patient-account-view'),
     path('patient/reports/', views.patient_reports, name='patient-reports'),
     path('patient/status/', views.patient_status, name='patient-status'),
+    path("patient/status/share-link/", views.patient_generate_share_link, name="patient-status-share-link"),
+    path("share/status/<str:token>/", views.shared_status_view, name="shared-status"),
+    path('status-shared/', views.status_shared, name='status-shared'),
+
 
     path('save_doctor/', views.save_doctor, name='save_doctor'),
     path('save_patient/', views.save_patient, name='save_patient'),

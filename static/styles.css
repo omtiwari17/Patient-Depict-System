@@ -1622,3 +1622,67 @@ label{font-size:.9rem; opacity:.9}
 
 
 
+/* ============ Share Page Buttons ============ */
+.btn-primary-pill {
+  background: linear-gradient(135deg, #2ec4b6 0%, #27ae9b 100%);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(46,196,182,0.35), inset 0 0 0 1px rgba(255,255,255,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  backdrop-filter: saturate(120%);
+}
+.btn-primary-pill:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 22px rgba(46,196,182,0.45);
+  filter: brightness(1.05);
+}
+.btn-primary-pill:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(46,196,182,0.35);
+}
+.btn-primary-pill:disabled {
+  background: #b6e9e3;
+  color: #eefdfb;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary-pill {
+  background: linear-gradient(135deg, #4361ee 0%, #3b53d6 100%);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(67,97,238,0.35), inset 0 0 0 1px rgba(255,255,255,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  backdrop-filter: saturate(120%);
+}
+.btn-secondary-pill:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 22px rgba(67,97,238,0.45);
+  filter: brightness(1.05);
+}
+.btn-secondary-pill:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(67,97,238,0.35);
+}
+.btn-secondary-pill:disabled {
+  background: #c9d1ff;
+  color: #f2f4ff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.share-link-input {
+  flex: 1;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+  border: 1px solid rgba(67,97,238,0.18);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+}
+
+
+
+

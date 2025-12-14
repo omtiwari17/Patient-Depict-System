@@ -3,7 +3,7 @@
 <main class="main-content fade-in">
   <section class="section container reveal">
     <h2 class="h2">🔁 Share Status</h2>
-    <div class="card" style="margin-bottom: 1rem">
+    <div class="card card-spacing-sm">
       <h3 style="margin-top: 0">Current Status</h3>
       <p class="status-text" style="margin: 0.5rem 0">
         <strong>Status:</strong> {{ patient.status }}
@@ -16,16 +16,9 @@
       </p>
 
       <div style="display: flex; gap: 0.5rem; align-items: center">
-        <input
-          id="shareLink"
-          class="input"
-          type="text"
-          readonly
-          value="{{ share_url|default:'' }}"
-          placeholder="Shareable link will appear here"
-          style="flex: 1"
-        />
-        <button class="btn" id="copyBtn" type="button">Copy Link</button>
+        <button class="btn btn-primary-pill" id="generateLink" type="button">Generate Link</button>
+        <input id="shareLink" class="input share-link-input" type="text" readonly value="{{ share_url|default:'' }}" placeholder="Shareable link will appear here" />
+        <button class="btn btn-secondary-pill" id="copyBtn" type="button">Copy Link</button>
       </div>
       <small class="muted" style="display: block; margin-top: 0.5rem"
         >Anyone with the link can view this status.</small
@@ -45,5 +38,39 @@
     </div>
   </section>
 </main>
+
+<script>
+  (function(){
+    const btn = document.getElementById('generateLink');
+    const input = document.getElementById('shareLink');
+    const copyBtn = document.getElementById('copyBtn');
+    function getCookie(name){
+      const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+      return m ? decodeURIComponent(m[2]) : null;
+    }
+    if(!btn || !input) return;
+    if (copyBtn) { copyBtn.disabled = !input.value; }
+    btn.addEventListener('click', async function(){
+      try{
+        const res = await fetch('{% url "patient-status-share-link" %}', {
+          method: 'POST',
+          headers: { 'X-CSRFToken': getCookie('csrftoken') },
+          credentials: 'same-origin'
+        });
+        const data = await res.json();
+        if(data.ok){
+          input.value = data.url;
+          // auto-select so user can copy quickly
+          input.focus(); input.select();
+          if (copyBtn) { copyBtn.disabled = false; }
+        } else {
+          alert(data.error || 'Could not generate link');
+        }
+      } catch(e){
+        alert('Error generating link');
+      }
+    });
+  })();
+</script>
 
 {% endblock %}

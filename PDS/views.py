@@ -19,6 +19,10 @@ from django.conf import settings
 import os
 from django.http import JsonResponse
 
+from django.core import signing
+from django.views.decorators.http import require_GET, require_POST
+from django.utils import timezone
+
 
 
 def index(request):
@@ -98,6 +102,50 @@ def patient_status(request):
     patient = create_patient.objects.get(email=email)
 
     return render(request, "patient-share-status.html", {"patient": patient})
+
+def status_shared(request):
+    return render(request, "status-share.html")
+@require_POST
+def patient_generate_share_link(request):
+    email = request.session.get('patient_session')
+    if not email:
+        return JsonResponse({"ok": False, "error": "Not logged in"}, status=401)
+
+    try:
+        patient = create_patient.objects.get(email=email)
+    except create_patient.DoesNotExist:
+        return JsonResponse({"ok": False, "error": "Patient not found"}, status=404)
+
+    token = signing.dumps({"pid": patient.id}, salt="status-share")
+    url = request.build_absolute_uri(reverse('shared-status', args=[token]))
+    return JsonResponse({"ok": True, "url": url, "token": token})
+
+
+@require_GET
+def shared_status_view(request, token: str):
+    try:
+        data = signing.loads(token, salt="status-share", max_age=60*60*24*30)
+        pid = data.get("pid")
+        patient = create_patient.objects.get(pk=pid)
+    except Exception:
+        return render(request, "status-share.html", {"invalid": True})
+
+    # Simple color map for badge
+    color_map = {
+        "Active": "#2ec4b6",
+        "Stable": "#ffd166",
+        "Recovering": "#4caf50",
+        "Critical": "#e63946",
+        "Admitted": "#4361ee",
+    }
+    status_color = color_map.get(patient.status, "#2c3e50")
+
+    return render(request, "status-share.html", {
+        "name": patient.name,
+        "status": patient.status,
+        "status_color": status_color,
+        "updated_at": timezone.now().strftime("%b %d, %Y %I:%M %p")
+    })
 
 def login(request):
     return render(request, "login.html")
@@ -304,7 +352,7 @@ def doc_pat_status(request):
     try:
         patient = create_patient.objects.get(pk=patient_id)
         patient.status = status
-        #patient.status_notes = notes
+        patient.status_notes = notes
         patient.save()
         messages.success(request, f"Status updated for {patient.name} → {status}.")
     except (create_patient.DoesNotExist, ValueError):

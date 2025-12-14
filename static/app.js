@@ -207,13 +207,7 @@ if (statusBadge){
   const copyBtn = $('#copyBtn') || $('#copyLink');
   const toast = $('#copyToast');
 
-  // If present on page: wire up behavior
-  if (shareInput) {
-    // If no value provided by server, fall back to current URL
-    if (!shareInput.value) {
-      try { shareInput.value = window.location.href; } catch (e) {}
-    }
-  }
+  // If present on page: do not auto-fill; stays empty until generated
 
   function showToast() {
     if (!toast) return;
