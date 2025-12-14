@@ -42,6 +42,7 @@ urlpatterns = [
     path('doctor/reports/', views.doctor_reports, name='doctor-reports'),
     path('doctor/status/', views.doctor_status, name='doctor-status'),
     path('doctor/status/update/', views.doc_pat_status, name='doctor-status-update'),
+    path('doctor/update/account/', views.update_doc_acc, name='doctor-update-account'),
 
     path('patient/dashboard/', views.patient_dashboard, name='patient-dashboard'),
     path('patient/account-edit/', views.patient_account_edit, name='patient-account-edit'),
@@ -51,6 +52,7 @@ urlpatterns = [
     path("patient/status/share-link/", views.patient_generate_share_link, name="patient-status-share-link"),
     path("share/status/<str:token>/", views.shared_status_view, name="shared-status"),
     path('status-shared/', views.status_shared, name='status-shared'),
+    path('patient/update/account/', views.update_patient_acc, name='patient-update-account'),
 
 
     path('save_doctor/', views.save_doctor, name='save_doctor'),

@@ -3,16 +3,11 @@
   <main class="main-content fade-in">
     <section class="section container reveal">
       <h2 class="h2">👁️ View Account</h2>
-      <form id="patientViewForm" class="card" style="margin-bottom:1rem;">
-        <div class="grid" style="grid-template-columns:1fr 1fr; gap:.8rem;">
-          <div><label>Patient Email / ID</label><input name="email" list="patientListView" id="patientListView" class="input" required></div>
-          <div style="align-self:end"><button class="btn btn-primary-pill" type="submit">Lookup</button></div>
-        </div>
-        <div id="patientViewOutput" style="margin-top:1rem;"></div>
-      </form>
-      <div class="card">
-        <h3>Your Recent Activity</h3>
-        <p class="muted">Reports, statuses and recent messages appear here.</p>
+      <div class="card" style="padding:1rem;">
+        <p><b>Name:</b> {{ patient.name }}</p>
+        <p><b>Email:</b> <span id="accountEmail">{{ patient.email }}</span></p>
+        <p><b>Disease:</b> {{ patient.disease }}</p>
+        <p><b>Status:</b> {{ patient.status }}</p>
       </div>
     </section>
   </main>

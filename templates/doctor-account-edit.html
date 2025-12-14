@@ -1,32 +1,82 @@
-
 {% extends 'doctor-base.html' %} {% block doctor %}
 
-  <main class="main-content fade-in">
-    <section class="section container reveal">
-      <h2 class="h2">✏️ Edit Account</h2>
-      <form id="editAccountForm" class="card" style="padding:1.4rem;border-radius:12px;">
-        <div style="display:grid;gap:.8rem;grid-template-columns:1fr 1fr;">
-          <div>
-            <label for="docName" style="display:block;font-weight:700;margin-bottom:.3rem;">Full Name</label>
-            <input type="text" id="docName" class="input" value="Dr. Jane Doe"/>
-          </div>
-          <div>
-            <label for="docEmail" style="display:block;font-weight:700;margin-bottom:.3rem;">Email</label>
-            <input type="email" id="docEmail" class="input" value="doctor@health.com"/>
-          </div>
-          <div>
-            <label for="docSpec" style="display:block;font-weight:700;margin-bottom:.3rem;">Specialization</label>
-            <input type="text" id="docSpec" class="input" value="Internal Medicine"/>
-          </div>
-          <div>
-            <label for="docClinic" style="display:block;font-weight:700;margin-bottom:.3rem;">Clinic</label>
-            <input type="text" id="docClinic" class="input" value="Health Buddy Clinic"/>
-          </div>
+<main class="main-content fade-in">
+  <section class="section container reveal">
+    <h2 class="h2">✏️ Edit Account</h2>
+    <form
+      action="{% url 'doctor-update-account' %}"
+      .
+      method="POST"
+      class="card"
+      style="padding: 1.4rem; border-radius: 12px"
+    >
+      {% csrf_token %}
+      <div style="display: grid; gap: 0.8rem; grid-template-columns: 1fr 1fr">
+        <div>
+          <label
+            for="docName"
+            style="display: block; font-weight: 700; margin-bottom: 0.3rem"
+            >Full Name</label
+          >
+          <input
+            type="text"
+            id="docName"
+            name="name"
+            class="input"
+            value="{{ doctor_acc.name }}"
+          />
         </div>
-        <button type="submit" class="btn-submit" style="margin-top:1rem;">💾 Save Changes</button>
-        <div id="editResponse" style="margin-top:.8rem;"></div>
-      </form>
-    </section>
-  </main>
+        <div>
+          <label
+            for="phone"
+            style="display: block; font-weight: 700; margin-bottom: 0.3rem"
+            >Phone No.</label
+          >
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            class="input"
+            value="{{ doctor_acc.phone }}"
+          />
+        </div>
+        <div>
+          <label
+            for="docExp"
+            style="display: block; font-weight: 700; margin-bottom: 0.3rem"
+            >Experience</label
+          >
+          <input
+            type="text"
+            id="docExp"
+            name="experience"
+            class="input"
+            value="{{ doctor_acc.experience }}"
+          />
+        </div>
+        <div>
+          <label
+            for="docPassword"
+            style="display: block; font-weight: 700; margin-bottom: 0.3rem"
+            >Password</label
+          >
+          <input type="text" id="docPassword" name="password" class="input" />
+        </div>
+      </div>
+      {% for message in messages %}
+      <div class="alert success">{{ message }}</div>
+      {% endfor %}
+
+      <button
+        type="submit"
+        class="btn btn-primary-pill"
+        style="margin-top: 1rem"
+      >
+        💾 Save Changes
+      </button>
+      <div id="editResponse" style="margin-top: 0.8rem"></div>
+    </form>
+  </section>
+</main>
 
 {% endblock %}

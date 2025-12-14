@@ -62,7 +62,7 @@ def doctor_dashboard(request):
 def doctor_account_edit(request):
     email = request.session.get('doctor_session')
     doctor_acc = create_doctor.objects.get(email=email)
-    return render(request, "doctor-account-edit.html", 'doctor_acc': doctor_acc)
+    return render(request, "doctor-account-edit.html", {'doctor_acc': doctor_acc})
 
 def doctor_account_view(request):
     email = request.session.get('doctor_session')
@@ -98,10 +98,16 @@ def patient_dashboard(request):
     return render(request, "patient-dashboard.html",{"patient": patient})
 
 def patient_account_edit(request):
-    return render(request, "patient-account-edit.html")
+    email = request.session.get('patient_session')
+
+    patient = create_patient.objects.get(email=email)
+
+    return render(request, "patient-account-edit.html", {"patient": patient})
 
 def patient_account_view(request):
-    return render(request, "patient-account-view.html")
+    email = request.session.get('patient_session')
+    patient = create_patient.objects.get(email=email)
+    return render(request, "patient-account-view.html", {"patient": patient})
 
 def patient_reports(request):
     return render(request, "patient-reports.html")
@@ -331,6 +337,7 @@ def role_login(request, role: str):
         pat_obj= pat[0]['name']
         request.session['patient_session'] = email
         request.session['patient_name'] = pat_obj
+        request.session['patient_id'] = pat[0]['patient_id']
         return redirect("/patient/dashboard/")
     
     else:
@@ -373,6 +380,51 @@ def doc_pat_status(request):
     return redirect('doctor-status')
 
 
+def update_doc_acc(request):
+    if request.method == "POST":
+        email = request.session.get('doctor_session')
+        doctor_acc = create_doctor.objects.get(email=email)
+
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        experience = request.POST.get('experience')
+        password = request.POST.get('password')
+
+        # Update fields
+        doctor_acc.name = name
+        doctor_acc.phone = phone
+        doctor_acc.experience = experience
+        if password:
+            doctor_acc.password = password
+
+        doctor_acc.save()
+
+        messages.success(request, "Account details updated successfully.")
+
+        return redirect('doctor-account-edit')
+
+def update_patient_acc(request):
+    if request.method == "POST":
+        email = request.session.get('patient_session')
+        patient_acc = create_patient.objects.get(email=email)
+
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        password = request.POST.get('password')
+
+        # Update fields
+        patient_acc.name = name
+        patient_acc.phone = phone
+        patient_acc.address = address
+        if password:
+            patient_acc.password = password
+
+        patient_acc.save()
+
+        messages.success(request, "Account details updated successfully.")
+
+        return redirect('patient-account-edit')
 
 def upload_report(request):
     if request.method == "POST":
