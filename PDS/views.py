@@ -222,6 +222,7 @@ def patient_status(request):
 
 def status_shared(request):
     return render(request, "status-share.html")
+
 @require_POST
 def patient_generate_share_link(request):
     email = request.session.get('patient_session')
