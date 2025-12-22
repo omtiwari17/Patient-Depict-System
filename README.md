@@ -40,9 +40,8 @@ The system is built around three clear roles:
 
 **Patient**
 
-* Uploads and views text-only medical reports
 * Tracks doctor updates
-* Generates or revokes a secure shareable status link
+* Generates a secure shareable status link
 
 ---
 
@@ -130,7 +129,6 @@ It is not intended to replace hospital systems but can integrate with them in fu
 
 ## Future enhancements
 
-* HL7 FHIR–based API integration
 * Two-factor authentication
 * Mobile application (Flutter / React Native)
 * Teleconsultation and secure messaging
